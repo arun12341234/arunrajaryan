@@ -1,1 +1,1 @@
-web: python first_test.py
+web: gunicorn first_test:app
