@@ -15,11 +15,12 @@
 			<div id="wrapper">
 
 				<!-- Intro -->
+				{% if user_data%}
 					<section class="intro">
 						<header>
-							<h1>I'm first_name,</h1>
-							<p><h3>designation | Langulages</h3></p>
-							<p>I have yoe years of experience in designation.<br> <!-- and currently working at Appinventiv Technology Pvt. Ltd -->
+							<h1>I'm {{user_data.first_name}},</h1>
+							<p><h3>{{user_data.designation}} | {{user_data.Langulages}}</h3></p>
+							<p>I have {{user_data.exp_year}} years of experience in {{user_data.exp_in}}.<br> <!-- and currently working at Appinventiv Technology Pvt. Ltd -->
 							Scroll down for my Project details<br>
 						</p>
 							<ul class="actions">
@@ -30,7 +31,7 @@
 							<span class="image fill" data-position="center"><img src="{{ url_for('static', filename='images/arunrajaryan.jpg') }}" alt="" /></span>
 						</div>
 					</section>
-
+					{% endif %}
 				<!-- Section -->
 
 
@@ -39,26 +40,28 @@
 					<!-- Section -->
 				
 					<!-- Section -->
-					
+					{% for item in data %}
+
+				
 					<section id="0">
 						<header>
-							<h2>Breathalyzer Alcohol Content Check:</h2>
+							<h2>{{item.project_name}}</h2>
 						</header>
 						<div class="content">
-							<p>An application feature Which is Integrated
-                                with an IoT Device and passing the values to the application. The BAC status will
-                                be displayed in message board in the application.<br>
-								Generate Report: A reporting
-                                tool which is integrated in the application to generate the reports according to the
-                                data.
-							<br>Technologies used - Python, Django, Pandas, Angular 8+<br>
+							<p>{{item.project_desc}}
+							<br>Technologies used - {{item.project_tech}}<br>
 								<b><u>
-							<a href="http://49.206.19.247:8779/" target="blank" style="color:blue">Website</a>
+							<a href="{{item.project_url}}" target="blank" style="color:blue">{{item.url_type}}</a>
 								</u></b></p>
 							<span class="image main"><img src="{{ url_for('static', filename='images/alc.png') }}" alt="" /></span>
 						</div>
 					</section>
+				</span>
+				{% endfor %}
 					<!-- Section -->
+		
+
+				
 					<section id="lms">
 						<header>
 							<h2>LMS [Learning Management System]</h2>
@@ -85,6 +88,8 @@
 							<span class="image main"><img src="{{ url_for('static', filename='images/masterlearning.png') }}" alt="" /></span>
 						</div>
 					</section>
+
+		
 					<!-- Section -->
 					<section id="avl">
 						<header>
@@ -201,10 +206,22 @@
 <!--									<li><a href="#" class="icon brands fa-twitter"><span class="label">Twitter</span></a></li>-->
 <!--									<li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>-->
 <!--									<li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>-->
-									<li><a href="https://wa.me/9934110211?text=Hello" target="blank"  class="icon brands fa-whatsapp"><span class="label">Whatsapp</span></a></li>
-									<li><a href="mailto:ak080495@gmail.com" target="blank"  class="icon brands fa-google"><span class="label">Gmail</span></a></li>
-									<li><a href="https://www.linkedin.com/in/arun-kumar-1bb0b4b5/" target="blank" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
-									<li><a href="https://github.com/arun12341234/" target="blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									{% if user_contact.whatsapp %}
+									<li><a href="https://wa.me/{{user_contact.whatsapp}}?text=Hello" target="blank"  class="icon brands fa-whatsapp"><span class="label">Whatsapp</span></a></li>
+									{% endif %}
+									{% if user_contact.gmail %}
+									<li><a href="mailto:{{user_contact.gmail}}" target="blank"  class="icon brands fa-google"><span class="label">Gmail</span></a></li>
+									{% endif %}
+									{% if user_contact.linkdin %}
+									
+									
+
+									<li><a href="https://www.linkedin.com/in/{{user_contact.linkdin}}/" target="blank" class="icon brands fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+									{% endif %}
+									{% if user_contact.github %}
+									<li><a href="https://github.com/{{user_contact.github}}/" target="blank" class="icon brands fa-github"><span class="label">GitHub</span></a></li>
+									{% endif %}
+
 									<!-- <li><a href="https://bitbucket.org/surajShuttler/" target="blank" class="icon brands fa-bitbucket"><span class="label">Bitbucket</span></a></li> -->
 
 								</ul>
@@ -212,19 +229,23 @@
 						</div>
 						<footer>
 							<ul class="items">
+								{% if user_contact%}
 								<li>
 									<h3>Email</h3>
-									<a href="mailto:ak080495@gmail.com" target="blank" style="color:blue">ak080495@gmail.com</a>
+									<a href="mailto:{{user_contact.email}}" target="blank" style="color:blue">{{user_contact.email}}</a>
 								</li>
+							
 								<li>
 									<h3>Phone</h3>
-									<span><a href="tel:+919934110211" style="color:blue">+919934110211</a> | <a href="tel:+919663720230" style="color:blue">+919663720230</a></span>
+									<span><a href="tel:{{user_contact.phone1}}" style="color:blue">{{user_contact.phone1}}</a> | <a href="tel:{{user_contact.phone2}}" style="color:blue">{{user_contact.phone2}}</a></span>
 								</li>
+								
 								<li>
 									<h3>Address</h3>
-									<span>House no. 3072/1B, Block 7, Ranjeet Nagar, New Delhi, Delhi 110008.
+									<span>{{user_contact.address}}
 									</span>
 								</li>
+								{% endif %}
 							</ul>
 						</footer>
 					</section>
