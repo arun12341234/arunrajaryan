@@ -18,7 +18,9 @@ Bootstrap(app)
 #for dtabase 
 from flask_sqlalchemy import SQLAlchemy
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:root@localhost/portfolio'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+# print(db)
 #simple html page 
 @app.route("/")
 # def hello_world():
